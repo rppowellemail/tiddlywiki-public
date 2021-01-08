@@ -197,6 +197,14 @@ Error message and password prompt
 
 <li>git kata - branch basics 01 scenario 01</li>
 
+<li>git kata - filesystem repo 01 scenario 01</li>
+
+<li>git kata - filesystem repo 02 scenario 01 - init --bare</li>
+
+<li>git kata - filesystem repo 02 scenario 02 - init - remote add origin</li>
+
+<li>git kata - merge 01 scenario 01 - branch merge conflict</li>
+
 <li>Tiddlywiki and GitHub Saver</li>
 
 <li>Tiddlywiki and GitHub Saver - Links</li>
@@ -9637,7 +9645,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20201224035321160" list="GettingStarted" modified="20201224035326480" title="$:/StoryList">
+<div created="20210108010511223" list="[[git kata - filesystem repo 01 scenario 01]] [[git kata - filesystem repo 02 scenario 02 - init - remote add origin]] [[git kata - filesystem repo 02 scenario 01 - init --bare]]" modified="20210108032042027" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9926,6 +9934,131 @@ git -C repo add phonetic.md
 git -C repo commit -m &quot;004 master phonetic commit&quot;
 
 # see which commit HEAD is pointed to
+git -C repo log --all --oneline --graph --decorate
+```</pre>
+</div>
+<div created="20210108024818991" modified="20210108031949994" tags="" title="git kata - filesystem repo 01 scenario 01">
+<pre>```
+# git kata - filesystem repo 01 scenario 01 - clone from fs
+# setup
+mkdir r0;
+git -C r0 init
+#git -C r0 config user.email &quot;rppowellemail@gmail.com&quot;;
+#git -C r0 config user.name &quot;Rob Powell&quot;
+
+printf &quot;Numeric List\n&quot; &gt; r0/numeric.md
+git -C r0 add numeric.md
+git -C r0 commit -m &quot;000 master initial commit&quot;
+git -C r0 log --all --oneline --graph --decorate
+
+# git clone from existing
+git clone r0 r1
+git -C r1 checkout -b b1
+printf &quot;* one\n&quot; &gt;&gt; r1/numeric.md
+git -C r1 add numeric.md
+git -C r1 commit -m &quot;001 b1 numeric changes C01&quot;
+git -C r1 log --all --oneline --graph --decorate
+git -C r1 push --set-upstream origin b1
+
+git -C r0 log --all --oneline --graph --decorate
+git -C r0 merge b1
+git -C r0 log --all --oneline --graph --decorate
+```</pre>
+</div>
+<div created="20210108030144898" modified="20210108031004027" tags="" title="git kata - filesystem repo 02 scenario 01 - init --bare">
+<pre>```
+# git kata - filesystem repo 02 scenario 01 - init --bare
+# setup
+mkdir r0;
+git -C r0 init --bare fs_origin.git
+#git -C r0 config user.email &quot;rppowellemail@gmail.com&quot;;
+#git -C r0 config user.name &quot;Rob Powell&quot;
+
+git clone r0/fs_origin.git r1
+printf &quot;Numeric List\n&quot; &gt; r1/numeric.md
+git -C r1 add numeric.md
+git -C r1 commit -m &quot;000 master initial commit&quot;
+git -C r1 log --all --oneline --graph --decorate
+git -C r1 push
+```</pre>
+</div>
+<div created="20210108030803484" modified="20210108031025933" tags="" title="git kata - filesystem repo 02 scenario 02 - init - remote add origin">
+<pre>```
+# git kata - filesystem repo 02 scenario 02 - init | remote add origin
+# setup
+mkdir r0
+git -C r0 init --bare fs_origin.git
+#git -C r0 config user.email &quot;rppowellemail@gmail.com&quot;;
+#git -C r0 config user.name &quot;Rob Powell&quot;
+
+mkdir r1
+git -C r1 init
+printf &quot;Numeric List\n&quot; &gt; r1/numeric.md
+git -C r1 add numeric.md
+git -C r1 commit -m &quot;000 master initial commit&quot;
+git -C r1 log --all --oneline --graph --decorate
+
+git -C r1 remote add origin ../r0/fs_origin.git
+git -C r1 push --set-upstream origin master
+```</pre>
+</div>
+<div created="20210108021806474" modified="20210108021912419" tags="" title="git kata - merge 01 scenario 01 - branch merge conflict">
+<pre>```
+# git kata - merge 01 scenario 01 - branch merge conflict
+# setup
+mkdir repo;
+git -C repo init;
+#git -C repo config user.email &quot;rppowellemail@gmail.com&quot;;
+#git -C repo config user.name &quot;Rob Powell&quot;
+
+printf &quot;Numeric List\n&quot; &gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;000 master initial commit&quot;
+
+## branch b1 and merge
+
+git -C repo checkout -b b1
+printf &quot;* one\n&quot; &gt;&gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;001 b1 numeric changes C01&quot;
+
+git -C repo checkout master
+git -C repo merge b1
+
+## branch b2
+
+git -C repo checkout -b b2
+printf &quot;* two\n&quot; &gt;&gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;002 b2 numeric changes C02&quot;
+
+## branch b3 (from master)
+
+git -C repo checkout master
+git -C repo checkout -b b3
+printf &quot;* three\n&quot; &gt;&gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;003 b3 numeric changes C03&quot;
+
+git -C repo log --all --oneline --graph --decorate
+
+git -C repo merge b2
+git -C repo log --all --oneline --graph --decorate
+
+## branch b3 merge conflict
+
+echo &quot;merge conflict:&quot;
+cat repo/numeric.md
+
+echo &quot;fix merge conflict:&quot;
+printf &quot;Numeric List\n* one\n* two\n* three\n&quot; &gt; repo/numeric.md
+cat repo/numeric.md
+
+git -C repo add numeric.md
+git -C repo commit -m &quot;004 b3 fix merge conflict C04&quot;
+
+git -C repo checkout master
+git -C repo merge b3
 git -C repo log --all --oneline --graph --decorate
 ```</pre>
 </div>
