@@ -197,6 +197,8 @@ Error message and password prompt
 
 <li>git kata - branch basics 01 scenario 01</li>
 
+<li>git kata - clone repo over existing</li>
+
 <li>git kata - filesystem repo 01 scenario 01</li>
 
 <li>git kata - filesystem repo 02 scenario 01 - init --bare</li>
@@ -9645,7 +9647,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210108010511223" list="[[git kata - filesystem repo 01 scenario 01]] [[git kata - filesystem repo 02 scenario 02 - init - remote add origin]] [[git kata - filesystem repo 02 scenario 01 - init --bare]]" modified="20210108032042027" title="$:/StoryList">
+<div created="20210529004233656" list="GettingStarted" modified="20210529004330265" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9935,6 +9937,48 @@ git -C repo commit -m &quot;004 master phonetic commit&quot;
 
 # see which commit HEAD is pointed to
 git -C repo log --all --oneline --graph --decorate
+```</pre>
+</div>
+<div created="20210529004944601" modified="20210529005016754" tags="" title="git kata - clone repo over existing">
+<pre>```
+printf &quot;%s\n&quot; &quot;--- Setup r1 ---&quot;
+
+mkdir r1
+mkdir r1/d1
+printf &quot;t1\n&quot; &gt;&gt; r1/d1/t1.md
+
+mkdir r1/d2
+printf &quot;t2\n&quot; &gt;&gt; r1/d2/t2.md
+
+git -C r1 init
+git -C r1 add d1/t1.md
+git -C r1 add d2/t2.md
+git -C r1 commit -m &quot;000 master - initial commit&quot;
+git -C r1 checkout -b b1
+
+find r1 -name '*.md' -exec echo {} \; -exec cat {} \;
+
+printf &quot;%s\n&quot; &quot;--- clone to w1 ---&quot;
+
+git clone -b b1 r1 w1
+
+printf &quot;%s\n&quot; &quot;--- create and overwrite w2 ---&quot;
+
+mkdir w2
+mkdir w2/d2
+printf &quot;w2-t2\n&quot; &gt;&gt; w2/d2/t2.md
+mkdir w2/d3
+printf &quot;w2-t3\n&quot; &gt;&gt; w2/d3/t3.md
+
+find w2 -name '*.md' -exec echo {} \; -exec cat {} \;
+printf '%s\n' '---'
+
+git clone --no-checkout -b b1 r1 /var/tmp/tmp-git-checkout
+mv /var/tmp/tmp-git-checkout/.git w2
+rmdir /var/tmp/tmp-git-checkout/
+git -C w2 reset --hard HEAD
+
+find w2 -name '*.md' -exec echo {} \; -exec cat {} \;
 ```</pre>
 </div>
 <div created="20210108024818991" modified="20210108031949994" tags="" title="git kata - filesystem repo 01 scenario 01">
