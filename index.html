@@ -205,6 +205,8 @@ Error message and password prompt
 
 <li>$:/view</li>
 
+<li>Draft of 'git kata - merge 01 scenario 01 - branch merge conflict'</li>
+
 <li>git kata - 00 - introduction</li>
 
 <li>git kata - branch basics 01  scenario 02</li>
@@ -9667,7 +9669,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210622015219268" list="[[git kata - merge 01 scenario 01 - branch merge conflict]] GettingStarted" modified="20210622020018319" title="$:/StoryList">
+<div created="20210622015219268" list="[[Draft of 'git kata - merge 01 scenario 01 - branch merge conflict']] GettingStarted" modified="20210622020018319" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9866,6 +9868,69 @@ Error message and password prompt
 </div>
 <div created="20201212044415382" modified="20201212044416576" title="$:/view">
 <pre>classic</pre>
+</div>
+<div created="20210108021806474" draft.of="git kata - merge 01 scenario 01 - branch merge conflict" draft.title="git kata - merge 01 scenario 01 - branch merge conflict" modified="20210622020451243" tags="" title="Draft of 'git kata - merge 01 scenario 01 - branch merge conflict'">
+<pre>```
+# git kata - merge 01 scenario 01 - branch merge conflict
+# setup
+mkdir repo;
+git -C repo init;
+#git -C repo config user.email &quot;rppowellemail@gmail.com&quot;;
+#git -C repo config user.name &quot;Rob Powell&quot;
+
+printf &quot;Numeric List\n&quot; &gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;000 master initial commit&quot;
+
+## branch b1 and merge
+
+git -C repo checkout -b b1
+printf &quot;* one\n&quot; &gt;&gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;001 b1 numeric changes C01&quot;
+
+git -C repo checkout master
+git -C repo merge b1
+
+## branch b2
+
+git -C repo checkout -b b2
+printf &quot;* two\n&quot; &gt;&gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;002 b2 numeric changes C02&quot;
+
+## branch b3 (from master)
+
+git -C repo checkout master
+git -C repo checkout -b b3
+printf &quot;* three\n&quot; &gt;&gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;003 b3 numeric changes C03&quot;
+
+git -C repo log --all --oneline --graph --decorate
+
+git -C repo merge b2
+git -C repo log --all --oneline --graph --decorate
+
+## branch b3 merge conflict
+
+echo &quot;merge conflict:&quot;
+cat repo/numeric.md
+
+echo &quot;fix merge conflict:&quot;
+printf &quot;Numeric List\n* one\n* two\n* three\n&quot; &gt; repo/numeric.md
+cat repo/numeric.md
+
+# git -C repo mergetool
+# git -C repo mergetool --tool=vimdiff
+
+git -C repo add numeric.md
+git -C repo commit -m &quot;004 b3 fix merge conflict C04&quot;
+
+git -C repo checkout master
+git -C repo merge b3
+git -C repo log --all --oneline --graph --decorate
+```</pre>
 </div>
 <div created="20201213034123951" modified="20201213034347326" tags="" title="git kata - 00 - introduction">
 <pre>! `git` kata
