@@ -47,7 +47,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE." />
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
-<title>My TiddlyWiki — a non-linear personal web notebook</title>
+<title>rppowellemail's TiddlyWiki — a non-linear personal web notebook</title>
 <!--~~ This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ~~-->
 
 <!--~~ Raw markup ~~-->
@@ -161,6 +161,8 @@ Error message and password prompt
 
 <li>$:/palette</li>
 
+<li>$:/SiteTitle</li>
+
 <li>$:/state/tab--1498284803</li>
 
 <li>$:/state/tab--1963855381</li>
@@ -205,21 +207,23 @@ Error message and password prompt
 
 <li>$:/view</li>
 
-<li>git kata - 00 - introduction</li>
+<li>git kata - 000 - introduction</li>
 
-<li>git kata - branch basics 01  scenario 02</li>
+<li>git kata - branch - scenario 001 - setup basic repo</li>
 
-<li>git kata - branch basics 01 scenario 01</li>
+<li>git kata - branch - scenario 002 - creating branches</li>
 
-<li>git kata - clone repo over existing</li>
+<li>git kata - clone - clone repo over existing repo</li>
 
-<li>git kata - filesystem repo 01 scenario 01</li>
+<li>git kata - clone - scenario 001 - clone from local filesystem</li>
 
-<li>git kata - filesystem repo 02 scenario 01 - init --bare</li>
+<li>git kata - filesystem repo 002 scenario 001 - init --bare</li>
 
-<li>git kata - filesystem repo 02 scenario 02 - init - remote add origin</li>
+<li>git kata - filesystem repo 002 scenario 002 - init - remote add origin</li>
 
-<li>git kata - merge 01 scenario 01 - branch merge conflict</li>
+<li>git kata - merge - scenario 001 - branch and merge conflict with single file</li>
+
+<li>git kata - snippet - find and echo file name and contents</li>
 
 <li>Tiddlywiki and GitHub Saver</li>
 
@@ -9643,6 +9647,9 @@ Error message and password prompt
 <div created="20201212044426442" modified="20201212044426442" title="$:/palette">
 <pre>$:/palettes/Twilight</pre>
 </div>
+<div created="20210623012022723" modified="20210623012038234" title="$:/SiteTitle">
+<pre>rppowellemail's ~TiddlyWiki</pre>
+</div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/state/tab--1498284803">
 <pre>$:/core/ui/AdvancedSearch/Filter</pre>
 </div>
@@ -9652,8 +9659,8 @@ Error message and password prompt
 <div created="20210622020123255" modified="20210622020127449" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
 </div>
-<div created="20201212035947324" modified="20210622020328216" title="$:/state/tab-1749438307">
-<pre>$:/core/ui/ControlPanel/Info</pre>
+<div created="20201212035947324" modified="20210623012052422" title="$:/state/tab-1749438307">
+<pre>$:/core/ui/ControlPanel/Appearance</pre>
 </div>
 <div created="20201212035949580" modified="20201213030030350" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
@@ -9667,7 +9674,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210622015219268" list="" modified="20210622020746755" title="$:/StoryList">
+<div created="20210623003858959" list="" modified="20210623015820462" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9734,7 +9741,7 @@ Error message and password prompt
 <div created="20201212050116533" modified="20201213033558270" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
-<div created="20201212035705729" modified="20201213034100601" title="$:/temp/search">
+<div created="20201212035705729" modified="20210623015847132" title="$:/temp/search">
 <pre></pre>
 </div>
 <div created="20201212044403413" modified="20201212044411191" title="$:/theme">
@@ -9867,7 +9874,7 @@ Error message and password prompt
 <div created="20201212044415382" modified="20201212044416576" title="$:/view">
 <pre>classic</pre>
 </div>
-<div created="20201213034123951" modified="20201213034347326" tags="" title="git kata - 00 - introduction">
+<div created="20201213034123951" modified="20210623012834127" tags="" title="git kata - 000 - introduction">
 <pre>! `git` kata
 
 This is a series of steps to exercise `git` commands and features.
@@ -9877,9 +9884,64 @@ Starting with the simple and getting complex.
 This should run natively within `bash` shell such as ~MacOS terminal and/or Windows cygwin.
 </pre>
 </div>
-<div created="20201224035043057" modified="20201224035331752" tags="" title="git kata - branch basics 01  scenario 02">
+<div created="20201213033533768" modified="20210623015016910" tags="git-kata" title="git kata - branch - scenario 001 - setup basic repo">
 <pre>```
-# git kata - branch basics 01 scenario 02
+# git kata - branch basics 001
+# setup
+mkdir repo;
+git -C repo init;
+git -C repo config user.email &quot;rppowellemail@gmail.com&quot;;
+git -C repo config user.name &quot;Rob Powell&quot;
+
+echo &quot;Numeric List&quot; &gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;000 master initial commit&quot;
+
+git -C repo log --all --oneline --graph --decorate
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+
+git -C repo checkout -b work
+echo &quot;Numeric List
+* one
+* two
+* three&quot; &gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;001 work numeric changes 1&quot;
+
+git -C repo log --all --oneline --graph --decorate
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+
+echo &quot;Numeric List
+* One
+* Two
+* Three&quot; &gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;002 work numeric changes 2&quot;
+
+echo &quot;Numeric List
+* 1
+* 2
+* 3&quot; &gt; repo/numeric.md
+git -C repo add numeric.md
+git -C repo commit -m &quot;003 work numeric changes 3&quot;
+
+git -C repo log --all --oneline --graph --decorate
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+
+git -C repo checkout master
+echo &quot;Phonetic List&quot; &gt; repo/phonetic.md
+git -C repo add phonetic.md
+git -C repo commit -m &quot;004 master phonetic commit&quot;
+
+# see which commit HEAD is pointed to
+git -C repo log --all --oneline --graph --decorate
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+```
+</pre>
+</div>
+<div created="20201224035043057" modified="20210623013505599" tags="" title="git kata - branch - scenario 002 - creating branches">
+<pre>```
+# git kata - branch - scenario 002 - creating branches
 # setup
 mkdir repo;
 git -C repo init;
@@ -9928,53 +9990,10 @@ git -C repo checkout master
 
 # see which commit HEAD is pointed to
 git -C repo log --all --oneline --graph --decorate
-```</pre>
+```
+</pre>
 </div>
-<div created="20201213033533768" modified="20201224035132985" tags="git-kata" title="git kata - branch basics 01 scenario 01">
-<pre>```
-# git kata - branch basics 01
-# setup
-mkdir repo;
-git -C repo init;
-git -C repo config user.email &quot;rppowellemail@gmail.com&quot;;
-git -C repo config user.name &quot;Rob Powell&quot;
-
-echo &quot;Numeric List&quot; &gt; repo/numeric.md
-git -C repo add numeric.md
-git -C repo commit -m &quot;000 master initial commit&quot;
-
-git -C repo checkout -b work
-echo &quot;Numeric List
-* one
-* two
-* three&quot; &gt; repo/numeric.md
-git -C repo add numeric.md
-git -C repo commit -m &quot;001 work numeric changes 1&quot;
-
-echo &quot;Numeric List
-* One
-* Two
-* Three&quot; &gt; repo/numeric.md
-git -C repo add numeric.md
-git -C repo commit -m &quot;002 work numeric changes 2&quot;
-
-echo &quot;Numeric List
-* 1
-* 2
-* 3&quot; &gt; repo/numeric.md
-git -C repo add numeric.md
-git -C repo commit -m &quot;003 work numeric changes 3&quot;
-
-git -C repo checkout master
-echo &quot;Phonetic List&quot; &gt; repo/phonetic.md
-git -C repo add phonetic.md
-git -C repo commit -m &quot;004 master phonetic commit&quot;
-
-# see which commit HEAD is pointed to
-git -C repo log --all --oneline --graph --decorate
-```</pre>
-</div>
-<div created="20210529004944601" modified="20210529005016754" tags="" title="git kata - clone repo over existing">
+<div created="20210529004944601" modified="20210623015047720" tags="" title="git kata - clone - clone repo over existing repo">
 <pre>```
 printf &quot;%s\n&quot; &quot;--- Setup r1 ---&quot;
 
@@ -10016,7 +10035,7 @@ git -C w2 reset --hard HEAD
 find w2 -name '*.md' -exec echo {} \; -exec cat {} \;
 ```</pre>
 </div>
-<div created="20210108024818991" modified="20210108031949994" tags="" title="git kata - filesystem repo 01 scenario 01">
+<div created="20210108024818991" modified="20210623015444938" tags="" title="git kata - clone - scenario 001 - clone from local filesystem">
 <pre>```
 # git kata - filesystem repo 01 scenario 01 - clone from fs
 # setup
@@ -10044,7 +10063,7 @@ git -C r0 merge b1
 git -C r0 log --all --oneline --graph --decorate
 ```</pre>
 </div>
-<div created="20210108030144898" modified="20210108031004027" tags="" title="git kata - filesystem repo 02 scenario 01 - init --bare">
+<div created="20210108030144898" modified="20210623015829523" tags="" title="git kata - filesystem repo 002 scenario 001 - init --bare">
 <pre>```
 # git kata - filesystem repo 02 scenario 01 - init --bare
 # setup
@@ -10061,9 +10080,9 @@ git -C r1 log --all --oneline --graph --decorate
 git -C r1 push
 ```</pre>
 </div>
-<div created="20210108030803484" modified="20210108031025933" tags="" title="git kata - filesystem repo 02 scenario 02 - init - remote add origin">
+<div created="20210108030803484" modified="20210623015817657" tags="" title="git kata - filesystem repo 002 scenario 002 - init - remote add origin">
 <pre>```
-# git kata - filesystem repo 02 scenario 02 - init | remote add origin
+# git kata - init - scenario 001 - init bare fs and add remote origin
 # setup
 mkdir r0
 git -C r0 init --bare fs_origin.git
@@ -10081,14 +10100,14 @@ git -C r1 remote add origin ../r0/fs_origin.git
 git -C r1 push --set-upstream origin master
 ```</pre>
 </div>
-<div created="20210108021806474" modified="20210622020636188" tags="" title="git kata - merge 01 scenario 01 - branch merge conflict">
+<div created="20210108021806474" modified="20210623014906273" tags="" title="git kata - merge - scenario 001 - branch and merge conflict with single file">
 <pre>```
-# git kata - merge 01 scenario 01 - branch merge conflict
+# git kata - merge - scenario 001 - branch and merge conflict with single file
 # setup
 mkdir repo;
 git -C repo init;
-#git -C repo config user.email &quot;rppowellemail@gmail.com&quot;;
-#git -C repo config user.name &quot;Rob Powell&quot;
+git -C repo config user.email &quot;rppowellemail@gmail.com&quot;;
+git -C repo config user.name &quot;Rob Powell&quot;
 
 printf &quot;Numeric List\n&quot; &gt; repo/numeric.md
 git -C repo add numeric.md
@@ -10104,12 +10123,20 @@ git -C repo commit -m &quot;001 b1 numeric changes C01&quot;
 git -C repo checkout master
 git -C repo merge b1
 
+git -C repo status
+git -C repo log --all --oneline --graph --decorate
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+
 ## branch b2
 
 git -C repo checkout -b b2
 printf &quot;* two\n&quot; &gt;&gt; repo/numeric.md
 git -C repo add numeric.md
 git -C repo commit -m &quot;002 b2 numeric changes C02&quot;
+
+git -C repo status
+git -C repo log --all --oneline --graph --decorate
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 
 ## branch b3 (from master)
 
@@ -10122,12 +10149,17 @@ git -C repo commit -m &quot;003 b3 numeric changes C03&quot;
 git -C repo log --all --oneline --graph --decorate
 
 git -C repo merge b2
+
+git -C repo status
 git -C repo log --all --oneline --graph --decorate
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 
 ## branch b3 merge conflict
 
 echo &quot;merge conflict:&quot;
 cat repo/numeric.md
+
+#git -C repo mergetool --tool=vimdiff
 
 echo &quot;fix merge conflict:&quot;
 printf &quot;Numeric List\n* one\n* two\n* three\n&quot; &gt; repo/numeric.md
@@ -10141,7 +10173,14 @@ git -C repo commit -m &quot;004 b3 fix merge conflict C04&quot;
 
 git -C repo checkout master
 git -C repo merge b3
+git -C repo status
 git -C repo log --all --oneline --graph --decorate
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+```</pre>
+</div>
+<div created="20210623004526006" modified="20210623004603146" tags="" title="git kata - snippet - find and echo file name and contents">
+<pre>```
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 ```</pre>
 </div>
 <div created="20201212044139123" modified="20201212050230689" tags="[[Tiddlywiki and Github Saver]]" title="Tiddlywiki and GitHub Saver">
