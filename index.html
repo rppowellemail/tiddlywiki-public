@@ -223,6 +223,8 @@ Error message and password prompt
 
 <li>git kata - merge - scenario 001 - branch and merge conflict with single file</li>
 
+<li>git kata - merge squash - scenario 001 - branch and merge with squash</li>
+
 <li>git kata - snippet - find and echo file name and contents</li>
 
 <li>Tiddlywiki and GitHub Saver</li>
@@ -9674,7 +9676,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210623003858959" list="" modified="20210623015820462" title="$:/StoryList">
+<div created="20210723021416889" list="" modified="20210723021425026" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9741,8 +9743,8 @@ Error message and password prompt
 <div created="20201212050116533" modified="20201213033558270" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
-<div created="20201212035705729" modified="20210623015847132" title="$:/temp/search">
-<pre></pre>
+<div created="20201212035705729" modified="20210723021423278" title="$:/temp/search">
+<pre>find</pre>
 </div>
 <div created="20201212044403413" modified="20201212044411191" title="$:/theme">
 <pre>$:/themes/tiddlywiki/vanilla</pre>
@@ -10175,6 +10177,53 @@ git -C repo checkout master
 git -C repo merge b3
 git -C repo status
 git -C repo log --all --oneline --graph --decorate
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+```</pre>
+</div>
+<div created="20210723023428659" modified="20210723023513757" tags="" title="git kata - merge squash - scenario 001 - branch and merge with squash">
+<pre>```
+# git kata - merge with squash 001
+
+## Step 1 - setup master branch
+mkdir repo
+git -C repo init
+
+printf &quot;m1\n&quot; &gt;&gt; repo/readme.md
+git -C repo add readme.md
+git -C repo commit -m &quot;000 master - commit m01&quot;
+
+## Step 2
+printf &quot;m2\n&quot; &gt;&gt; repo/readme.md
+git -C repo add readme.md
+git -C repo commit -m &quot;001 master - commit m02&quot;
+
+## Step 3 - making branch b1 with changes
+git -C repo checkout -b b1
+printf &quot;f1\n&quot; &gt;&gt; repo/feature.md
+git -C repo add feature.md
+git -C repo commit -m &quot;002 b1 - commit b01&quot;
+
+## Step 4
+git -C repo checkout master
+printf &quot;m3\n&quot; &gt;&gt; repo/readme.md
+git -C repo add readme.md
+git -C repo commit -m &quot;003 master - commit m03&quot;
+
+## Step 5
+git -C repo checkout b1
+printf &quot;f2\n&quot; &gt;&gt; repo/feature.md
+git -C repo add feature.md
+git -C repo commit -m &quot;004 b1 - commit b02&quot;
+
+git -C repo log --all --decorate --oneline --graph
+find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+
+### Making some changes back on master
+git -C repo checkout master
+git -C repo merge --squash b1
+git -C repo commit -m &quot;005 master - master and b1 merged&quot;
+
+git -C repo log --all --decorate --oneline --graph
 find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 ```</pre>
 </div>
