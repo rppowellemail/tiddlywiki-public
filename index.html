@@ -207,6 +207,8 @@ Error message and password prompt
 
 <li>$:/view</li>
 
+<li>git - credentials</li>
+
 <li>git kata - 000 - introduction</li>
 
 <li>git kata - branch - scenario 001 - setup basic repo</li>
@@ -9680,7 +9682,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210811172146841" list="[[git kata - 000 - introduction]] [[tiddlywiki - Colors]] [[tiddlywiki-public - setup]]" modified="20210811173849155" title="$:/StoryList">
+<div created="20210811180502928" list="" modified="20210811180504749" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9744,7 +9746,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20201212050116533" modified="20210811173800055" title="$:/temp/NewTagName">
+<div created="20201212050116533" modified="20210811180613153" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
 <div created="20201212035705729" modified="20210723024207240" title="$:/temp/search">
@@ -9879,6 +9881,23 @@ Error message and password prompt
 </div>
 <div created="20201212044415382" modified="20201212044416576" title="$:/view">
 <pre>classic</pre>
+</div>
+<div created="20210811180510953" modified="20210811180614840" tags="git" title="git - credentials">
+<pre>For when you use the wrong username:
+
+```
+git config --local user.name &quot;Rob Powell&quot;
+git config --local user.email rppowellemail@gmail.com
+git commit --amend --reset-author
+```
+
+For unsetting/clearing credentials:
+
+```
+git config --local --unset credential.helper
+git config --local credential.helper &quot;&quot;
+```
+</pre>
 </div>
 <div created="20201213034123951" modified="20210623012834127" tags="git-kata" title="git kata - 000 - introduction">
 <pre>! `git` kata
