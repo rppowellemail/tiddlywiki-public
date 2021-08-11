@@ -229,6 +229,8 @@ Error message and password prompt
 
 <li>git kata - snippet - find and echo file name and contents</li>
 
+<li>tiddlywiki - Colors</li>
+
 <li>Tiddlywiki and GitHub Saver</li>
 
 <li>Tiddlywiki and GitHub Saver - Links</li>
@@ -9663,22 +9665,22 @@ Error message and password prompt
 <div created="20210622020123255" modified="20210622020127449" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
 </div>
-<div created="20201212035947324" modified="20210623012052422" title="$:/state/tab-1749438307">
-<pre>$:/core/ui/ControlPanel/Appearance</pre>
+<div created="20201212035947324" modified="20210811172148813" title="$:/state/tab-1749438307">
+<pre>$:/core/ui/ControlPanel/Saving</pre>
 </div>
 <div created="20201212035949580" modified="20201213030030350" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201212035834950" modified="20201212035909444" title="$:/state/tab/moresidebar-1850697562">
-<pre>$:/core/ui/MoreSideBar/System</pre>
+<div created="20201212035834950" modified="20210811173846933" title="$:/state/tab/moresidebar-1850697562">
+<pre>$:/core/ui/MoreSideBar/All</pre>
 </div>
-<div created="20201212035812250" modified="20210622020745825" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Recent</pre>
+<div created="20201212035812250" modified="20210811173811277" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/More</pre>
 </div>
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210723023754283" list="[[git kata - rebase branch to master - scenario 001]] [[git kata - merge squash - scenario 001 - branch and merge with squash]] GettingStarted" modified="20210723023754283" title="$:/StoryList">
+<div created="20210811172146841" list="[[git kata - 000 - introduction]] [[tiddlywiki - Colors]] [[tiddlywiki-public - setup]]" modified="20210811173849155" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9729,11 +9731,11 @@ Error message and password prompt
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
-            &quot;text&quot;: &quot;1920&quot;
+            &quot;text&quot;: &quot;1440&quot;
         },
         &quot;$:/info/browser/screen/height&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/height&quot;,
-            &quot;text&quot;: &quot;1080&quot;
+            &quot;text&quot;: &quot;900&quot;
         },
         &quot;$:/info/browser/language&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/language&quot;,
@@ -9742,7 +9744,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20201212050116533" modified="20201213033558270" title="$:/temp/NewTagName">
+<div created="20201212050116533" modified="20210811173800055" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
 <div created="20201212035705729" modified="20210723024207240" title="$:/temp/search">
@@ -10285,6 +10287,173 @@ find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 ```</pre>
 </div>
+<div created="20210811173234005" modified="20210811173802652" tags="tiddlywiki" title="tiddlywiki - Colors">
+<pre>\define colorbar(color, width:&quot;100&quot;,height:&quot;20&quot;)
+&lt;svg width=&quot;$width$&quot; height=&quot;$height$&quot;&gt;
+  &lt;rect fill=&quot;$color$&quot; x=&quot;0&quot; y=&quot;0&quot; width=&quot;$width$&quot; height=&quot;$height$&quot;/&gt;
+&lt;/svg&gt;
+\end
+
+For more information see: [[w3schools|https://www.w3schools.com/tags/ref_colornames.asp]]
+
+All modern browsers (and TW5!) support the following 140 color names (case insensitive!):
+
+&lt;&lt;&lt;
+''Example:''
+
+```
+@@color:white;background-color:red;This is white text on a red background@@
+```
+renders as: @@color:white;background-color:red;This is white text on a red background@@
+&lt;&lt;&lt;
+
+|Color Name |HEX |Color |h
+|AliceBlue  |#F0F8FF |&lt;&lt;colorbar #F0F8FF&gt;&gt;  |
+|AntiqueWhite  |#FAEBD7 |&lt;&lt;colorbar #FAEBD7&gt;&gt;  |
+|Aqua = Cyan |#00FFFF |&lt;&lt;colorbar #00FFFF&gt;&gt;  |
+|Aquamarine  |#7FFFD4 |&lt;&lt;colorbar #7FFFD4&gt;&gt;  |
+|Azure  |#F0FFFF |&lt;&lt;colorbar #F0FFFF&gt;&gt;  |
+|Beige  |#F5F5DC |&lt;&lt;colorbar #F5F5DC&gt;&gt;  |
+|Bisque  |#FFE4C4 |&lt;&lt;colorbar #FFE4C4&gt;&gt;  |
+|Black  |#000000 |&lt;&lt;colorbar #000000&gt;&gt;  |
+|BlanchedAlmond  |#FFEBCD |&lt;&lt;colorbar #FFEBCD&gt;&gt;  |
+|Blue  |#0000FF |&lt;&lt;colorbar #0000FF&gt;&gt;  |
+|BlueViolet  |#8A2BE2 |&lt;&lt;colorbar #8A2BE2&gt;&gt;  |
+|Brown  |#A52A2A |&lt;&lt;colorbar #A52A2A&gt;&gt;  |
+|BurlyWood  |#DEB887 |&lt;&lt;colorbar #DEB887&gt;&gt;  |
+|CadetBlue  |#5F9EA0 |&lt;&lt;colorbar #5F9EA0&gt;&gt;  |
+|Chartreuse  |#7FFF00 |&lt;&lt;colorbar #7FFF00&gt;&gt;  |
+|Chocolate  |#D2691E |&lt;&lt;colorbar #D2691E&gt;&gt;  |
+|Coral  |#FF7F50 |&lt;&lt;colorbar #FF7F50&gt;&gt;  |
+|CornflowerBlue  |#6495ED |&lt;&lt;colorbar #6495ED&gt;&gt;  |
+|Cornsilk  |#FFF8DC |&lt;&lt;colorbar #FFF8DC&gt;&gt;  |
+|Crimson  |#DC143C |&lt;&lt;colorbar #DC143C&gt;&gt;  |
+|Cyan = Aqua |#00FFFF |&lt;&lt;colorbar #00FFFF&gt;&gt;  |
+|DarkBlue  |#00008B |&lt;&lt;colorbar #00008B&gt;&gt;  |
+|DarkCyan  |#008B8B |&lt;&lt;colorbar #008B8B&gt;&gt;  |
+|DarkGoldenRod  |#B8860B |&lt;&lt;colorbar #B8860B&gt;&gt;  |
+|DarkGray / ~DarkGrey |#A9A9A9 |&lt;&lt;colorbar #A9A9A9&gt;&gt;  |
+|DarkGreen  |#006400 |&lt;&lt;colorbar #006400&gt;&gt;  |
+|DarkKhaki  |#BDB76B |&lt;&lt;colorbar #BDB76B&gt;&gt;  |
+|DarkMagenta  |#8B008B |&lt;&lt;colorbar #8B008B&gt;&gt;  |
+|DarkOliveGreen  |#556B2F |&lt;&lt;colorbar #556B2F&gt;&gt;  |
+|DarkOrange  |#FF8C00 |&lt;&lt;colorbar #FF8C00&gt;&gt;  |
+|DarkOrchid  |#9932CC |&lt;&lt;colorbar #9932CC&gt;&gt;  |
+|DarkRed  |#8B0000 |&lt;&lt;colorbar #8B0000&gt;&gt;  |
+|DarkSalmon  |#E9967A |&lt;&lt;colorbar #E9967A&gt;&gt;  |
+|DarkSeaGreen  |#8FBC8F |&lt;&lt;colorbar #8FBC8F&gt;&gt;  |
+|DarkSlateBlue  |#483D8B |&lt;&lt;colorbar #483D8B&gt;&gt;  |
+|DarkSlateGray / ~DarkSlateGrey |#2F4F4F |&lt;&lt;colorbar #2F4F4F&gt;&gt;  |
+|DarkTurquoise  |#00CED1 |&lt;&lt;colorbar #00CED1&gt;&gt;  |
+|DarkViolet  |#9400D3 |&lt;&lt;colorbar #9400D3&gt;&gt;  |
+|DeepPink  |#FF1493 |&lt;&lt;colorbar #FF1493&gt;&gt;  |
+|DeepSkyBlue  |#00BFFF |&lt;&lt;colorbar #&gt;&gt;  |
+|DimGray / ~DimGrey |#696969 |&lt;&lt;colorbar #696969&gt;&gt;  |
+|DodgerBlue  |#1E90FF |&lt;&lt;colorbar #1E90FF&gt;&gt;  |
+|FireBrick  |#B22222 |&lt;&lt;colorbar #B22222&gt;&gt;  |
+|FloralWhite  |#FFFAF0 |&lt;&lt;colorbar #FFFAF0&gt;&gt;  |
+|ForestGreen  |#228B22 |&lt;&lt;colorbar #228B22&gt;&gt;  |
+|Fuchsia / Magenta |#FF00FF |&lt;&lt;colorbar #FF00FF&gt;&gt;  |
+|Gainsboro  |#DCDCDC |&lt;&lt;colorbar #DCDCDC&gt;&gt;  |
+|GhostWhite  |#F8F8FF |&lt;&lt;colorbar #F8F8FF&gt;&gt;  |
+|Gold  |#FFD700 |&lt;&lt;colorbar #FFD700&gt;&gt;  |
+|GoldenRod  |#DAA520 |&lt;&lt;colorbar #DAA520&gt;&gt;  |
+|Gray / Grey |#808080 |&lt;&lt;colorbar #808080&gt;&gt;  |
+|Green  |#008000 |&lt;&lt;colorbar #008000&gt;&gt;  |
+|GreenYellow  |#ADFF2F |&lt;&lt;colorbar #ADFF2F&gt;&gt;  |
+|HoneyDew  |#F0FFF0 |&lt;&lt;colorbar #F0FFF0&gt;&gt;  |
+|HotPink  |#FF69B4 |&lt;&lt;colorbar #FF69B4&gt;&gt;  |
+|IndianRed   |#CD5C5C |&lt;&lt;colorbar #CD5C5C&gt;&gt;  |
+|Indigo   |#4B0082 |&lt;&lt;colorbar #4B0082&gt;&gt;  |
+|Ivory  |#FFFFF0 |&lt;&lt;colorbar #FFFFF0&gt;&gt;  |
+|Khaki  |#F0E68C |&lt;&lt;colorbar #F0E68C&gt;&gt;  |
+|Lavender  |#E6E6FA |&lt;&lt;colorbar #E6E6FA&gt;&gt;  |
+|LavenderBlush  |#FFF0F5 |&lt;&lt;colorbar #FFF0F5&gt;&gt;  |
+|LawnGreen  |#7CFC00 |&lt;&lt;colorbar #7CFC00&gt;&gt;  |
+|LemonChiffon  |#FFFACD |&lt;&lt;colorbar #FFFACD&gt;&gt;  |
+|LightBlue  |#ADD8E6 |&lt;&lt;colorbar #ADD8E6&gt;&gt;  |
+|LightCoral  |#F08080 |&lt;&lt;colorbar #F08080&gt;&gt;  |
+|LightCyan  |#E0FFFF |&lt;&lt;colorbar #E0FFFF&gt;&gt;  |
+|LightGoldenRodYellow  |#FAFAD2 |&lt;&lt;colorbar #FAFAD2&gt;&gt;  |
+|LightGray / ~LightGrey |#D3D3D3 |&lt;&lt;colorbar #D3D3D3&gt;&gt;  |
+|LightGreen  |#90EE90 |&lt;&lt;colorbar #90EE90&gt;&gt;  |
+|LightPink  |#FFB6C1 |&lt;&lt;colorbar #FFB6C1&gt;&gt;  |
+|LightSalmon  |#FFA07A |&lt;&lt;colorbar #FFA07A&gt;&gt;  |
+|LightSeaGreen  |#20B2AA |&lt;&lt;colorbar #20B2AA&gt;&gt;  |
+|LightSkyBlue  |#87CEFA |&lt;&lt;colorbar #87CEFA&gt;&gt;  |
+|LightSlateGray / ~LightSlateGrey |#778899 |&lt;&lt;colorbar #778899&gt;&gt;  |
+|LightSteelBlue  |#B0C4DE |&lt;&lt;colorbar #B0C4DE&gt;&gt;  |
+|LightYellow  |#FFFFE0 |&lt;&lt;colorbar #FFFFE0&gt;&gt;  |
+|Lime  |#00FF00 |&lt;&lt;colorbar #00FF00&gt;&gt;  |
+|LimeGreen  |#32CD32 |&lt;&lt;colorbar #32CD32&gt;&gt;  |
+|Linen  |#FAF0E6 |&lt;&lt;colorbar #FAF0E6&gt;&gt;  |
+|Magenta / Fuchsia |#FF00FF |&lt;&lt;colorbar #FF00FF&gt;&gt;  |
+|Maroon  |#800000 |&lt;&lt;colorbar #800000&gt;&gt;  |
+|MediumAquaMarine  |#66CDAA |&lt;&lt;colorbar #66CDAA&gt;&gt;  |
+|MediumBlue  |#0000CD |&lt;&lt;colorbar #0000CD&gt;&gt;  |
+|MediumOrchid  |#BA55D3 |&lt;&lt;colorbar #BA55D3&gt;&gt;  |
+|MediumPurple  |#9370DB |&lt;&lt;colorbar #9370DB&gt;&gt;  |
+|MediumSeaGreen  |#3CB371 |&lt;&lt;colorbar #3CB371&gt;&gt;  |
+|MediumSlateBlue  |#7B68EE |&lt;&lt;colorbar #7B68EE&gt;&gt;  |
+|MediumSpringGreen  |#00FA9A |&lt;&lt;colorbar #00FA9A&gt;&gt;  |
+|MediumTurquoise  |#48D1CC |&lt;&lt;colorbar #48D1CC&gt;&gt;  |
+|MediumVioletRed  |#C71585 |&lt;&lt;colorbar #C71585&gt;&gt;  |
+|MidnightBlue  |#191970 |&lt;&lt;colorbar #191970&gt;&gt;  |
+|MintCream  |#F5FFFA |&lt;&lt;colorbar #F5FFFA&gt;&gt;  |
+|MistyRose  |#FFE4E1 |&lt;&lt;colorbar #FFE4E1&gt;&gt;  |
+|Moccasin  |#FFE4B5 |&lt;&lt;colorbar #FFE4B5&gt;&gt;  |
+|NavajoWhite  |#FFDEAD |&lt;&lt;colorbar #FFDEAD&gt;&gt;  |
+|Navy  |#000080 |&lt;&lt;colorbar #000080&gt;&gt;  |
+|OldLace  |#FDF5E6 |&lt;&lt;colorbar #FDF5E6&gt;&gt;  |
+|Olive  |#808000 |&lt;&lt;colorbar #808000&gt;&gt;  |
+|OliveDrab  |#6B8E23 |&lt;&lt;colorbar #6B8E23&gt;&gt;  |
+|Orange  |#FFA500 |&lt;&lt;colorbar #FFA500&gt;&gt;  |
+|OrangeRed  |#FF4500 |&lt;&lt;colorbar #FF4500&gt;&gt;  |
+|Orchid  |#DA70D6 |&lt;&lt;colorbar #DA70D6&gt;&gt;  |
+|PaleGoldenRod  |#EEE8AA |&lt;&lt;colorbar #EEE8AA&gt;&gt;  |
+|PaleGreen  |#98FB98 |&lt;&lt;colorbar #98FB98&gt;&gt;  |
+|PaleTurquoise  |#AFEEEE |&lt;&lt;colorbar #AFEEEE&gt;&gt;  |
+|PaleVioletRed  |#DB7093 |&lt;&lt;colorbar #DB7093&gt;&gt;  |
+|PapayaWhip  |#FFEFD5 |&lt;&lt;colorbar #FFEFD5&gt;&gt;  |
+|PeachPuff  |#FFDAB9 |&lt;&lt;colorbar #FFDAB9&gt;&gt;  |
+|Peru  |#CD853F |&lt;&lt;colorbar #CD853F&gt;&gt;  |
+|Pink  |#FFC0CB |&lt;&lt;colorbar #FFC0CB&gt;&gt;  |
+|Plum  |#DDA0DD |&lt;&lt;colorbar #DDA0DD&gt;&gt;  |
+|PowderBlue  |#B0E0E6 |&lt;&lt;colorbar #B0E0E6&gt;&gt;  |
+|Purple  |#800080 |&lt;&lt;colorbar #800080&gt;&gt;  |
+|RebeccaPurple  |#663399 |&lt;&lt;colorbar #663399&gt;&gt;  |
+|Red  |#FF0000 |&lt;&lt;colorbar #FF0000&gt;&gt;  |
+|RosyBrown  |#BC8F8F |&lt;&lt;colorbar #BC8F8F&gt;&gt;  |
+|RoyalBlue  |#4169E1 |&lt;&lt;colorbar #4169E1&gt;&gt;  |
+|SaddleBrown  |#8B4513 |&lt;&lt;colorbar #8B4513&gt;&gt;  |
+|Salmon  |#FA8072 |&lt;&lt;colorbar #FA8072&gt;&gt;  |
+|SandyBrown  |#F4A460 |&lt;&lt;colorbar #F4A460&gt;&gt;  |
+|SeaGreen  |#2E8B57 |&lt;&lt;colorbar #2E8B57&gt;&gt;  |
+|SeaShell  |#FFF5EE |&lt;&lt;colorbar #FFF5EE&gt;&gt;  |
+|Sienna  |#A0522D |&lt;&lt;colorbar #A0522D&gt;&gt;  |
+|Silver  |#C0C0C0 |&lt;&lt;colorbar #C0C0C0&gt;&gt;  |
+|SkyBlue  |#87CEEB |&lt;&lt;colorbar #87CEEB&gt;&gt;  |
+|SlateBlue  |#6A5ACD |&lt;&lt;colorbar #6A5ACD&gt;&gt;  |
+|SlateGray / ~SlateGrey |#708090 |&lt;&lt;colorbar #708090&gt;&gt;  |
+|Snow  |#FFFAFA |&lt;&lt;colorbar #FFFAFA&gt;&gt;  |
+|SpringGreen  |#00FF7F |&lt;&lt;colorbar #00FF7F&gt;&gt;  |
+|SteelBlue  |#4682B4 |&lt;&lt;colorbar #4682B4&gt;&gt;  |
+|Tan  |#D2B48C |&lt;&lt;colorbar #D2B48C&gt;&gt;  |
+|Teal  |#008080 |&lt;&lt;colorbar #008080&gt;&gt;  |
+|Thistle  |#D8BFD8 |&lt;&lt;colorbar #D8BFD8&gt;&gt;  |
+|Tomato  |#FF6347 |&lt;&lt;colorbar #FF6347&gt;&gt;  |
+|Turquoise  |#40E0D0 |&lt;&lt;colorbar #40E0D0&gt;&gt;  |
+|Violet  |#EE82EE |&lt;&lt;colorbar #EE82EE&gt;&gt;  |
+|Wheat  |#F5DEB3 |&lt;&lt;colorbar #F5DEB3&gt;&gt;  |
+|White  |#FFFFFF |&lt;&lt;colorbar #FFFFFF&gt;&gt;  |
+|WhiteSmoke  |#F5F5F5 |&lt;&lt;colorbar #F5F5F5&gt;&gt;  |
+|Yellow  |#FFFF00 |&lt;&lt;colorbar #FFFF00&gt;&gt;  |
+|YellowGreen  |#9ACD32 |&lt;&lt;colorbar #9ACD32&gt;&gt;  |
+
+Reference:
+
+* https://kookma.github.io/TW-Scripts/</pre>
+</div>
 <div created="20201212044139123" modified="20201212050230689" tags="[[Tiddlywiki and Github Saver]]" title="Tiddlywiki and GitHub Saver">
 <pre>!! Instruction
 &lt;&lt;&lt;
@@ -10352,10 +10521,11 @@ To use for publishing
 # see demo at: https://kookma.github.io/TW5-GitHub-Saver/
 </pre>
 </div>
-<div created="20201212043707233" modified="20201212043732033" tags="" title="tiddlywiki-public - setup">
+<div created="20201212043707233" modified="20210811173027112" tags="" title="tiddlywiki-public - setup">
 <pre>Reference:
 
-* https://kookma.github.io/TW5-GitHub-Saver/</pre>
+* https://kookma.github.io/TW5-GitHub-Saver/
+* https://kookma.github.io/Tiddlywiki-and-GitHub-Pages/</pre>
 </div>
 
 
