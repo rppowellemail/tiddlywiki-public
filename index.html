@@ -231,6 +231,8 @@ Error message and password prompt
 
 <li>git kata - snippet - find and echo file name and contents</li>
 
+<li>Groovy - String Basics</li>
+
 <li>tiddlywiki - Colors</li>
 
 <li>tiddlywiki - links</li>
@@ -9684,7 +9686,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210811180502928" list="[[tiddlywiki - links]]" modified="20210811180504749" title="$:/StoryList">
+<div created="20210923224529060" list="[[Groovy - String Basics]] GettingStarted" modified="20210923224529060" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9735,11 +9737,11 @@ Error message and password prompt
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
-            &quot;text&quot;: &quot;1440&quot;
+            &quot;text&quot;: &quot;1920&quot;
         },
         &quot;$:/info/browser/screen/height&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/height&quot;,
-            &quot;text&quot;: &quot;900&quot;
+            &quot;text&quot;: &quot;1080&quot;
         },
         &quot;$:/info/browser/language&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/language&quot;,
@@ -10306,6 +10308,193 @@ find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 <div created="20210623004526006" modified="20210623004603146" tags="git-kata" title="git kata - snippet - find and echo file name and contents">
 <pre>```
 find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+```</pre>
+</div>
+<div created="20210923223420032" modified="20210923224515995" tags="[[groovy reference]]" title="Groovy - String Basics">
+<pre>! Groovy String Basics
+
+Strings can be single or double quotes:
+
+```
+def firstName = 'John'
+def lastName = &quot;Doe&quot;
+```
+
+```
+println 'ABCDEF'.length()		// output: 6
+println 'ABCDEF'.substring(1)		// output: BCDEF
+println 'ABCDEF'.indexOf('C')		// output: 2
+println 'ABCDEF'.replace('CD', 'XX')	// output: ABXXEF
+println 'ABCDEF'.toLowerCase()		// output: abcdef
+```
+
+String concatenation is the same as Java with the + sign:
+
+```
+def a = 'John'
+println &quot;Hello &quot; + a + &quot; and welcome&quot;	// output: Hello John and welcome
+```
+
+!! GStrings
+
+Groovy has GStrings
+
+```
+def firstName = 'John'
+def lastName = &quot;Doe&quot;
+println '${lastName}, ${firstName}'   // output: ${lastName}, ${firstName}
+println &quot;${lastName}, ${firstName}&quot;   // output: Doe, John
+```
+
+!! String Operators:
+
+```
+println 'ABC' - 'B'   // output: A
+println 'ABBC' - 'B'  // output: ABC
+println 'ABBC' - 'BB' // output: AC
+println 'ABC' * 2     // output: ABCABC
+println 'ABC' * 3     // output: ABCABCABC
+```
+
+!! String Escape Special Characters
+
+```
+println 'Hello\tWorld'	// output: Hello	World
+println 'Hi\\There'	// output: Hi\There
+println 'Hi\'There'	// output: Hi'There
+println &quot;Hi\&quot;There&quot;	// output: Hi&quot;There
+```
+
+!! String Multiple Lines
+
+```
+def str1 = &quot;&quot;&quot;#1 Hello 
+This is a multi line
+string example
+&quot;&quot;&quot;
+println str1
+ 
+def str2 = '''#2
+This is
+Another multi line
+string sammple
+'''
+println str2
+ 
+def str3 = '#3 This is\
+a sample with\
+backslash'
+println str3
+ 
+def str4 = '\n#4 Another example\n\
+with backslash\n\
+and next line'
+println str4
+```
+
+&lt;&lt;&lt;
+
+```
+#1 Hello 
+This is a multi line
+string example
+ 
+#2
+This is
+Another multi line
+string sammple
+ 
+#3 This isa sample withbackslash
+ 
+#4 Another example
+with backslash
+and next line
+```
+
+&lt;&lt;&lt;
+
+!! String Padding
+
+```
+def str = 'ABC'.padLeft(5)
+println str
+println str.length()
+```
+
+&lt;&lt;&lt;
+
+```
+  ABC
+5
+```
+
+&lt;&lt;&lt;
+
+```
+println 'ABC'.padLeft(5,'+') // output: ++ABC
+```
+
+```
+println 'ABC'.padLeft(10,'123') // output: 1231231ABC
+```
+
+```
+println 'ABC'.padLeft(8,'+')  // output: +++++ABC
+println 'ABC'.padRight(8,'+') // output: ABC+++++
+println 'ABC'.center(8,'+')   // output: ++ABC+++
+```
+
+!! String Tokenize
+
+```
+def list1 = 'i am john'.tokenize()
+```
+
+```
+Is the same as:
+def list1 = ['i', 'am', 'john']
+```
+
+By default, it will be tokenized by white spaces (space, tab, next line).
+
+It is possible to tokenize using a specific delimiter:
+
+```
+def a = 'i,am,john'.tokenize()     // same as: ['i,am,john']
+def b = 'i,am-john'.tokenize(',-') // same as: ['i', 'am', 'john']
+```
+
+!! String Closure
+
+`find` / `findAll`
+
+```
+println 'grails'.find{ it &gt; 'i' }     // output: r
+println 'grails'.findAll{ it &gt; 'i' }  // output: [r, l, s]
+println 'grails'.findAll{ it &gt;= 's' } // output: [s]
+```
+
+`every`
+
+```
+def a = 'abc'.every{ it &gt; 'b' }
+def b = 'abc'[0] &gt; 'b' &amp;&amp; 'abc'[1] &gt; 'b' &amp;&amp; 'abc'[2] &gt; 'b' 
+```
+
+`any`
+
+```
+def a = 'abc'.any{ it &gt; 'b' }
+def b = 'abc'[0] &gt; 'b' || 'abc'[1] &gt; 'b' || 'abc'[2] &gt; 'b' 
+```
+
+`collect`
+
+```
+'abc'.collect{ it }            // ['a', 'b', 'c']
+'abc'.collect{ it + '.' }      // ['a.', 'b.', 'c.']
+'abc'.collect{ 'test-' + it  } // ['test-a', 'test-b', 'test-c']
+'abc'.collect{ it * 3 }        // ['aaa', 'bbb', 'ccc']
 ```</pre>
 </div>
 <div created="20210811173234005" modified="20210811173802652" tags="tiddlywiki" title="tiddlywiki - Colors">
