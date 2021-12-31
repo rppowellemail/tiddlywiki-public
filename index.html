@@ -207,9 +207,11 @@ Error message and password prompt
 
 <li>$:/view</li>
 
-<li>Draft of 'New Tiddler'</li>
+<li>duckdb - 5 minute introduction</li>
 
 <li>duckdb - links</li>
+
+<li>duckdb - sql functions dateformat</li>
 
 <li>duckdb - sql introduction</li>
 
@@ -9692,7 +9694,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211231185244563" list="[[duckdb - sql introduction]] [[Draft of 'New Tiddler']] [[duckdb - links]] GettingStarted" modified="20211231194843411" title="$:/StoryList">
+<div created="20211231185244563" list="" modified="20211231200249452" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9892,15 +9894,19 @@ Error message and password prompt
 <div created="20201212044415382" modified="20201212044416576" title="$:/view">
 <pre>classic</pre>
 </div>
-<div created="20211231190432766" draft.of="New Tiddler" draft.title="duckdb - 5 minute introduction" modified="20211231194834073" tags="duckdb" title="Draft of 'New Tiddler'">
+<div created="20211231190432766" modified="20211231202818671" tags="duckdb" title="duckdb - 5 minute introduction">
 <pre>Reference:
 
 * https://shekhargulati.com/2019/12/15/the-5-minute-introduction-to-duckdb-the-sqlite-for-analytics/
 
+Download sales data from:
+
+* https://support.spatialkey.com/spatialkey-sample-csv-data/
+* https://support.spatialkey.com/wp-content/uploads/2021/02/SalesJan2009.csv
 
 ```
-CREATE TABLE sales(
-   Transaction_date date 
+duckdb sales.duckdb &quot;CREATE TABLE sales(
+   Transaction_date varchar
   ,Product          varchar 
   ,Price            bigint  
   ,Payment_Type     varchar 
@@ -9911,15 +9917,80 @@ CREATE TABLE sales(
   ,Account_Created  varchar 
   ,Last_Login       varchar 
   ,Latitude         double 
-  ,Longitude        double 
-)
+  ,Longitude        double
+  ,ZipCode        varchar
+);&quot;
 ```
-</pre>
+
+Import Sales data:
+
+```
+duckdb sales.duckdb &quot;CREATE TABLE sales(
+   Transaction_date timestamp
+  ,Product          varchar 
+  ,Price            bigint  
+  ,Payment_Type     varchar 
+  ,Name             varchar 
+  ,City             varchar 
+  ,State            varchar 
+  ,Country          varchar 
+  ,Account_Created  varchar 
+  ,Last_Login       varchar 
+  ,Latitude         double 
+  ,Longitude        double
+  ,ZipCode        varchar
+);&quot;
+```
+
+```
+duckdb sales.duckdb &quot;COPY sales FROM 'SalesJan2009.csv' (HEADER, TIMESTAMPFORMAT '%m/%d/%Y %H:%M');&quot;
+```
+!! query the data
+
+```
+duckdb sales.duckdb &quot;select count(*) from sales&quot;
+```
+
+```
+duckdb sales.duckdb &quot;select city, sum(price) from sales group by city&quot;
+```
+
+```
+duckdb sales.duckdb &quot;SELECT MIN(cnt), AVG(cnt),MAX(cnt) FROM
+    (select count(*) as cnt FROM sales 
+    GROUP BY EXTRACT(DOY FROM Transaction_date::DATE), 
+    EXTRACT(HOUR FROM Transaction_date)
+    ) stats&quot;
+```</pre>
 </div>
 <div created="20211231185322270" modified="20211231190910540" tags="duckdb" title="duckdb - links">
 <pre>* https://duckdb.org/docs/installation/
 * https://duckdb.org/docs/sql/introduction
 * https://shekhargulati.com/2019/12/15/the-5-minute-introduction-to-duckdb-the-sqlite-for-analytics/</pre>
+</div>
+<div created="20211231201232031" modified="20211231202829412" tags="" title="duckdb - sql functions dateformat">
+<pre>* https://duckdb.org/docs/sql/functions/dateformat
+
+`strptime(string, format)`
+
+```
+SELECT strptime('02/03/1992', '%d/%m/%Y');
+SELECT strptime('01/02/2009 04:53', '%d/%m/%Y %I:%M');
+
+SELECT strptime('01/25/2009 05:57', '%m/%d/%Y %I:%M');
+SELECT strptime('01/07/2009 19:48', '%m/%d/%Y %H:%M');
+
+```
+
+`csv` parsing:
+
+```
+-- in COPY statement
+COPY dates FROM 'test.csv' (DATEFORMAT '%d/%m/%Y', TIMESTAMPFORMAT '%A, %-d %B %Y - %I:%M:%S %p')
+
+-- in read_csv function
+SELECT * FROM read_csv('test.csv', dateformat='%m/%d/%Y');
+```</pre>
 </div>
 <div created="20211231190916441" modified="20211231195005145" tags="" title="duckdb - sql introduction">
 <pre>* https://duckdb.org/docs/sql/introduction
