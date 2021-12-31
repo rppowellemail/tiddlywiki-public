@@ -207,7 +207,11 @@ Error message and password prompt
 
 <li>$:/view</li>
 
+<li>Draft of 'New Tiddler'</li>
+
 <li>duckdb - links</li>
+
+<li>duckdb - sql introduction</li>
 
 <li>git - credentials</li>
 
@@ -9688,7 +9692,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211231185244563" list="[[duckdb - links]] GettingStarted" modified="20211231185244563" title="$:/StoryList">
+<div created="20211231185244563" list="[[duckdb - sql introduction]] [[Draft of 'New Tiddler']] [[duckdb - links]] GettingStarted" modified="20211231194843411" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9752,7 +9756,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20201212050116533" modified="20210811180613153" title="$:/temp/NewTagName">
+<div created="20201212050116533" modified="20211231190450496" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
 <div created="20201212035705729" modified="20210723024207240" title="$:/temp/search">
@@ -9888,8 +9892,200 @@ Error message and password prompt
 <div created="20201212044415382" modified="20201212044416576" title="$:/view">
 <pre>classic</pre>
 </div>
-<div created="20211231185322270" modified="20211231185330008" tags="" title="duckdb - links">
-<pre>* https://shekhargulati.com/2019/12/15/the-5-minute-introduction-to-duckdb-the-sqlite-for-analytics/</pre>
+<div created="20211231190432766" draft.of="New Tiddler" draft.title="duckdb - 5 minute introduction" modified="20211231194834073" tags="duckdb" title="Draft of 'New Tiddler'">
+<pre>Reference:
+
+* https://shekhargulati.com/2019/12/15/the-5-minute-introduction-to-duckdb-the-sqlite-for-analytics/
+
+
+```
+CREATE TABLE sales(
+   Transaction_date date 
+  ,Product          varchar 
+  ,Price            bigint  
+  ,Payment_Type     varchar 
+  ,Name             varchar 
+  ,City             varchar 
+  ,State            varchar 
+  ,Country          varchar 
+  ,Account_Created  varchar 
+  ,Last_Login       varchar 
+  ,Latitude         double 
+  ,Longitude        double 
+)
+```
+</pre>
+</div>
+<div created="20211231185322270" modified="20211231190910540" tags="duckdb" title="duckdb - links">
+<pre>* https://duckdb.org/docs/installation/
+* https://duckdb.org/docs/sql/introduction
+* https://shekhargulati.com/2019/12/15/the-5-minute-introduction-to-duckdb-the-sqlite-for-analytics/</pre>
+</div>
+<div created="20211231190916441" modified="20211231195005145" tags="" title="duckdb - sql introduction">
+<pre>* https://duckdb.org/docs/sql/introduction
+
+```
+duckdb intro.duckdb &quot;CREATE TABLE weather (
+    city           VARCHAR,
+    temp_lo        INTEGER, -- minimum temperature on a day
+    temp_hi        INTEGER, -- maximum temperature on a day
+    prcp           REAL,
+    date           DATE
+);
+CREATE TABLE cities (
+    name            VARCHAR,
+    lat             DECIMAL,
+    lon             DECIMAL
+);
+INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
+INSERT INTO cities VALUES ('San Francisco', -194.0, 53.0);
+INSERT INTO weather (city, temp_lo, temp_hi, prcp, date)
+    VALUES ('San Francisco', 43, 57, 0.0, '1994-11-29');
+INSERT INTO weather (date, city, temp_hi, temp_lo)
+    VALUES ('1994-11-29', 'Hayward', 54, 37);
+&quot;
+```
+
+!! Selects
+
+```
+duckdb intro.duckdb &quot;SELECT * FROM weather;&quot;
+duckdb -table intro.duckdb &quot;SELECT * FROM weather;&quot;
+duckdb -csv intro.duckdb &quot;SELECT * FROM weather;&quot;
+```
+
+```
+duckdb intro.duckdb &quot;SELECT city, temp_lo, temp_hi, prcp, date FROM weather;&quot;
+```
+
+Select with `as`:
+
+```
+duckdb intro.duckdb &quot;SELECT city, (temp_hi+temp_lo)/2 AS temp_avg, date FROM weather;&quot;
+```
+
+Qualified query:
+
+```
+duckdb intro.duckdb &quot;SELECT * FROM weather
+    WHERE city = 'San Francisco' AND prcp &gt; 0.0;&quot;
+```
+
+Reorder:
+
+```
+duckdb intro.duckdb &quot;SELECT * FROM weather
+    ORDER BY city;&quot;
+duckdb intro.duckdb &quot;SELECT * FROM weather
+    ORDER BY city, temp_lo;&quot;
+```
+
+Distinct:
+
+```
+duckdb intro.duckdb &quot;SELECT DISTINCT city
+    FROM weather;&quot;
+```
+
+```
+duckdb intro.duckdb &quot;SELECT DISTINCT city
+    FROM weather
+    ORDER BY city;&quot;
+```
+
+!! Joining between tables
+
+```
+duckdb intro.duckdb &quot;SELECT *
+    FROM weather, cities
+    WHERE city = name;&quot;
+
+SELECT city, temp_lo, temp_hi, prcp, date, lon, lat
+  FROM weather, cities
+  WHERE city = name;
+
+SELECT weather.city, weather.temp_lo, weather.temp_hi,
+       weather.prcp, weather.date, cities.lon, cities.lat
+    FROM weather, cities
+    WHERE cities.name = weather.city;
+```
+
+!!! INNER JOIN
+
+```
+SELECT *
+    FROM weather INNER JOIN cities ON (weather.city = cities.name);
+```
+
+!!! OUTER JOIN
+
+```
+SELECT *
+    FROM weather LEFT OUTER JOIN cities ON (weather.city = cities.name);
+```
+
+!! Aggregate Functions
+
+```
+SELECT max(temp_lo) FROM weather;
+```
+
+subquery:
+
+```
+SELECT city FROM weather
+    WHERE temp_lo = (SELECT max(temp_lo) FROM weather);
+```
+
+group by:
+
+```
+SELECT city, max(temp_lo)
+    FROM weather
+    GROUP BY city;
+```
+
+having:
+
+```
+SELECT city, max(temp_lo)
+    FROM weather
+    GROUP BY city
+    HAVING max(temp_lo) &lt; 40;
+```
+
+Starting with `S`:
+
+```
+SELECT city, max(temp_lo)
+    FROM weather
+    WHERE city LIKE 'S%'            -- (1)
+    GROUP BY city
+    HAVING max(temp_lo) &lt; 40;
+```
+
+!! Updating
+
+```
+UPDATE weather
+    SET temp_hi = temp_hi - 2,  temp_lo = temp_lo - 2
+    WHERE date &gt; '1994-11-28';
+```
+
+!! Deletion
+
+```
+SELECT * FROM weather;
+DELETE FROM weather WHERE city = 'Hayward';
+SELECT * FROM weather;
+```
+
+!! misc
+
+```
+duckdb intro.duckdb &quot;SELECT * FROM weather;
+SELECT * FROM cities;&quot;
+```</pre>
 </div>
 <div created="20210811180510953" modified="20210811180614840" tags="git" title="git - credentials">
 <pre>For when you use the wrong username:
