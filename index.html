@@ -10588,7 +10588,7 @@ find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 ```</pre>
 </div>
-<div created="20220123004024537" modified="20220123004541692" tags="" title="git kata - snippet - remote .git">
+<div created="20220123004024537" modified="20220123013952508" tags="" title="git kata - snippet - remote .git">
 <pre>The following will create a `.git` that will point to a remote git repo for tracking:
 
 ```
@@ -10620,7 +10620,7 @@ GITKATA_REPO=$(pwd)/repo.git
 GITKATA_WORKSPACE=$(pwd)/workspace
 
 git --git-dir=$GITKATA_REPO --work-tree=$GITKATA_WORKSPACE init
-git --git-dir=$GITKATA_REPO config core.worktree $GITKATA_WORKSPACE
+#git --git-dir=$GITKATA_REPO config core.worktree $GITKATA_WORKSPACE
 git --git-dir=$GITKATA_REPO config user.email &quot;rppowellemail@gmail.com&quot;;
 git --git-dir=$GITKATA_REPO config user.name &quot;Rob Powell&quot;
 
