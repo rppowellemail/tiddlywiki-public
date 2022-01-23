@@ -239,6 +239,8 @@ Error message and password prompt
 
 <li>git kata - snippet - find and echo file name and contents</li>
 
+<li>git kata - snippet - remote .git</li>
+
 <li>Groovy - String Basics</li>
 
 <li>JSON snippet 01</li>
@@ -9698,7 +9700,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="[[JSON snippet 01]] GettingStarted" title="$:/StoryList">
+<div created="20220122231307823" list="[[git kata - snippet - remote .git]] [[git kata - filesystem repo 002 scenario 001 - init --bare]] GettingStarted" modified="20220123003308026" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9765,7 +9767,7 @@ Error message and password prompt
 <div created="20201212050116533" modified="20211231190450496" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
-<div created="20201212035705729" modified="20211231203703588" title="$:/temp/search">
+<div created="20201212035705729" modified="20220123003320862" title="$:/temp/search">
 <pre></pre>
 </div>
 <div created="20201212044403413" modified="20201212044411191" title="$:/theme">
@@ -10584,6 +10586,53 @@ find repo -name '*.md' -exec echo {} \; -exec cat {} \;
 <div created="20210623004526006" modified="20210623004603146" tags="git-kata" title="git kata - snippet - find and echo file name and contents">
 <pre>```
 find repo -name '*.md' -exec echo {} \; -exec cat {} \;
+```</pre>
+</div>
+<div created="20220123004024537" modified="20220123004541692" tags="" title="git kata - snippet - remote .git">
+<pre>The following will create a `.git` that will point to a remote git repo for tracking:
+
+```
+mkdir workspace
+printf &quot;This is a test.\n&quot; &gt; workspace/test.md
+
+GITKATA_REPO=$(pwd)/repo.git
+GITKATA_WORKSPACE=$(pwd)/workspace
+
+# git init --separate-git-dir ./repo.git ./workspace
+git init --separate-git-dir $GITKATA_REPO $GITKATA_WORKSPACE
+git --git-dir=$GITKATA_REPO config user.email &quot;rppowellemail@gmail.com&quot;;
+git --git-dir=$GITKATA_REPO config user.name &quot;Rob Powell&quot;
+
+git -C workspace status
+git -C workspace add test.md
+git -C workspace commit -m &quot;initial commit&quot;
+git -C workspace log --all --oneline --graph --decorate
+ls -la workspace/.git
+```
+
+The following will set/use values in the remote git repo instead:
+
+```
+mkdir workspace
+printf &quot;This is a test.\n&quot; &gt; workspace/test.md
+
+GITKATA_REPO=$(pwd)/repo.git
+GITKATA_WORKSPACE=$(pwd)/workspace
+
+git --git-dir=$GITKATA_REPO --work-tree=$GITKATA_WORKSPACE init
+git --git-dir=$GITKATA_REPO config core.worktree $GITKATA_WORKSPACE
+git --git-dir=$GITKATA_REPO config user.email &quot;rppowellemail@gmail.com&quot;;
+git --git-dir=$GITKATA_REPO config user.name &quot;Rob Powell&quot;
+
+git --git-dir=$GITKATA_REPO status
+git --git-dir=$GITKATA_REPO add test.md
+git --git-dir=$GITKATA_REPO commit -m &quot;initial commit&quot;
+git --git-dir=$GITKATA_REPO log --all --oneline --graph --decorate
+
+###
+
+GIT_DIR=$GITKATA_REPO git status
+GIT_DIR=$GITKATA_REPO git log --all --oneline --graph --decorate
 ```</pre>
 </div>
 <div created="20210923223420032" modified="20210923224644407" tags="[[groovy reference]]" title="Groovy - String Basics">
