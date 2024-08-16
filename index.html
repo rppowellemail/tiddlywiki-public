@@ -229,6 +229,8 @@ Error message and password prompt
 
 <li>git kata - clone - scenario 001 - clone from local filesystem</li>
 
+<li>git kata - filesystem init and push to empty remote repo</li>
+
 <li>git kata - filesystem repo 002 scenario 001 - init --bare</li>
 
 <li>git kata - filesystem repo 002 scenario 002 - init - remote add origin</li>
@@ -9702,7 +9704,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20220201002457710" list="$:/ControlPanel [[git - config]] [[git - config - user.name user.email]] GettingStarted" modified="20220201003340410" title="$:/StoryList">
+<div created="20240816191033015" list="[[git kata - filesystem init and push to empty remote repo]] GettingStarted" modified="20240816191054383" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20201212044454966" modified="20201212044454966" title="$:/temp/advancedsearch">
@@ -9721,19 +9723,19 @@ Error message and password prompt
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
-            &quot;text&quot;: &quot;https://rppowellemail.github.io/tiddlywiki-public/&quot;
+            &quot;text&quot;: &quot;file:///Users/rppowell/Work/tiddlywiki-public/index.html&quot;
         },
         &quot;$:/info/url/host&quot;: {
             &quot;title&quot;: &quot;$:/info/url/host&quot;,
-            &quot;text&quot;: &quot;rppowellemail.github.io&quot;
+            &quot;text&quot;: &quot;&quot;
         },
         &quot;$:/info/url/hostname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/hostname&quot;,
-            &quot;text&quot;: &quot;rppowellemail.github.io&quot;
+            &quot;text&quot;: &quot;&quot;
         },
         &quot;$:/info/url/protocol&quot;: {
             &quot;title&quot;: &quot;$:/info/url/protocol&quot;,
-            &quot;text&quot;: &quot;https:&quot;
+            &quot;text&quot;: &quot;file:&quot;
         },
         &quot;$:/info/url/port&quot;: {
             &quot;title&quot;: &quot;$:/info/url/port&quot;,
@@ -9741,7 +9743,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/pathname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/pathname&quot;,
-            &quot;text&quot;: &quot;/tiddlywiki-public/&quot;
+            &quot;text&quot;: &quot;/Users/rppowell/Work/tiddlywiki-public/index.html&quot;
         },
         &quot;$:/info/url/search&quot;: {
             &quot;title&quot;: &quot;$:/info/url/search&quot;,
@@ -9749,7 +9751,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/origin&quot;: {
             &quot;title&quot;: &quot;$:/info/url/origin&quot;,
-            &quot;text&quot;: &quot;https://rppowellemail.github.io&quot;
+            &quot;text&quot;: &quot;file://&quot;
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
@@ -10381,6 +10383,31 @@ git -C r1 push --set-upstream origin b1
 git -C r0 log --all --oneline --graph --decorate
 git -C r0 merge b1
 git -C r0 log --all --oneline --graph --decorate
+```</pre>
+</div>
+<div created="20240816190718290" modified="20240816191049753" tags="git-kata" title="git kata - filesystem init and push to empty remote repo">
+<pre>git kata - filesystem init and push to empty remote repo
+
+```
+# git kata - filesystem repo 001 scenario 003 - init and push to empty remote repo
+# setup
+mkdir r0;
+git -C r0 init
+#git -C r0 config user.email &quot;rppowellemail@gmail.com&quot;;
+#git -C r0 config user.name &quot;Rob Powell&quot;
+
+printf &quot;Numeric List\n&quot; &gt; r0/numeric.md
+git -C r0 add numeric.md
+git -C r0 commit -m &quot;000 master initial commit&quot;
+git -C r0 log --all --oneline --graph --decorate
+
+# setup empty remote
+mkdir r1;
+git -C r1 init --bare
+
+git -C r0 remote add origin file://${PWD}/r1
+git -C r0 push --set-upstream origin main
+git -C r1 log --all --oneline --graph --decorate
 ```</pre>
 </div>
 <div created="20210108030144898" modified="20210623015829523" tags="git-kata" title="git kata - filesystem repo 002 scenario 001 - init --bare">
